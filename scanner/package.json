@@ -1,0 +1,10 @@
+{
+  "name": "dupescan-scanner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MinHash + LSH near-duplicate scanner used by the dupescan CLI",
+  "engines": {
+    "node": ">=22.6"
+  }
+}
