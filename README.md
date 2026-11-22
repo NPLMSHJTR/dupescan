@@ -1,5 +1,7 @@
 # dupescan
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 **Find the documents that are the same text wearing a different hat.** `dupescan`
 normalises text, shingles it into 5-word phrases, computes 64 MinHash values per
 document, and uses 16 LSH bands to avoid comparing every pair. Candidates are
@@ -15,6 +17,15 @@ exact    P 1.000  R 0.601  F1 0.750  (785 pairs, 46736 docs/s)
 
 The exact-hash baseline is seven times faster and misses 40% of the duplicates,
 because a single edited word changes every shingle that crosses it.
+
+## Workflow
+
+```mermaid
+flowchart LR
+    A["1. Generate Corpus & Truth Pairs<br/>(dupescan gen: 20,000 docs)"] --> B["2. Shingle + MinHash + LSH Banding<br/>(scanner/scan.ts: 64 hashes, 16x4 bands)"]
+    B --> C["3. Exact Jaccard Verification<br/>(Filter candidates >= 0.85)"]
+    C --> D["4. Precision / Recall / F1 Report<br/>(dupescan eval -> reports/)"]
+```
 
 ## Why not just hash the text
 
